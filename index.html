@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Linking CSS and JavaScript-->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link type="text/javascript" src="game.js">
+    <script  src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+    <title>Psychic-Game</title>
+</head>
+
+<!-- Pseudo Code
+    Determine how to start and play the game which will be by guessing what letter im thinking of by typing a number on the keypad
+    The computer has a random letter a-z to choose from
+    Determine if the user guessed the letter the computer was thinking
+    It will show what the user typed for their letter as well as what the computer chose randomly
+    If the user guessed the same letter they get a win
+    if the user guessed incorectly they get a lose
+    it will show both how many wins and losses the user has on the screen
+    the user needs to either get 10 right to win or 10 wrong to loose
+-->
+
+<body>
+    <h1>The Psychic-Game</h1>
+    <p id="startGame">Guess what letter i'm thinking of?</p>
+    <p id="userGuess">You guessed:</p>
+    <p id="computerGuess">Computer Choose:</p>
+    <p id="wins">Wins:</p>
+    <p id="losses">Losses:</p>
+    <p id="guessesLeft">Guesses Left:</p>
+    <p id="guessesSoFar">Your Guesses:</p>
+    
+
+    
+
+    <script>  
+    $(document).ready(function(){
+        // Variables throughout the game
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        //wins and losses
+        var wins = 0;
+        var losses = 0;
+        // Guesses by both computer and user
+        var computerGuess = "";
+        var guessesLeft = 10;
+        var guessesSoFar = [];
+    
+        // When user hits a key it logs it and links it to the event
+        $(document).keyup(function(event){
+        getRandomLetter();
+        // This is the user lines of code for if they type upper or lower it will capture it 
+        var userGuess = event.key;
+        userGuess == computerGuess[Math.floor(Math.random()*computerChoices.length )];
+        userGuess.toLowerCase();
+        console.log(userGuess);
+        // making the computer generate a random number from the array
+        function getRandomLetter(){
+            computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            console.log (computerGuess);
+        }
+        // getRandomLetter();
+        // If and else statements
+        if (userGuess == computerGuess){
+            wins ++;
+            alert ("Wow you are a psychic! You Win! ");
+            guessesLeft = 10;
+            guessesSoFar.length = 0;
+        }
+        else if (guessesLeft == 0){
+            losses ++;
+            alert ("You're not psychic at all! Try again")
+            guessesLeft = 10;
+            guessesSoFar.length =0;
+        }
+        else if (userGuess !== computerGuess){
+            guessesLeft--;
+        }
+
+        document.userGuess = "you chose" + userGuess;
+    })
+        });
+    
+    
+</script>
+</body>
+
+</html>
