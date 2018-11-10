@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link type="text/javascript" src="game.js">
-    <script  src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 
     <title>Psychic-Game</title>
 </head>
@@ -36,59 +35,67 @@
     <p id="losses">Losses:</p>
     <p id="guessesLeft">Guesses Left:</p>
     <p id="guessesSoFar">Your Guesses:</p>
-    
 
-    
 
-    <script>  
-    $(document).ready(function(){
-        // Variables throughout the game
-        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-        //wins and losses
-        var wins = 0;
-        var losses = 0;
-        // Guesses by both computer and user
-        var computerGuess = "";
-        var guessesLeft = 10;
-        var guessesSoFar = [];
-    
-        // When user hits a key it logs it and links it to the event
-        $(document).keyup(function(event){
-        getRandomLetter();
-        // This is the user lines of code for if they type upper or lower it will capture it 
-        var userGuess = event.key;
-        userGuess == computerGuess[Math.floor(Math.random()*computerChoices.length )];
-        userGuess.toLowerCase();
-        console.log(userGuess);
-        // making the computer generate a random number from the array
-        function getRandomLetter(){
-            computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-            console.log (computerGuess);
-        }
-        // getRandomLetter();
-        // If and else statements
-        if (userGuess == computerGuess){
-            wins ++;
-            alert ("Wow you are a psychic! You Win! ");
-            guessesLeft = 10;
-            guessesSoFar.length = 0;
-        }
-        else if (guessesLeft == 0){
-            losses ++;
-            alert ("You're not psychic at all! Try again")
-            guessesLeft = 10;
-            guessesSoFar.length =0;
-        }
-        else if (userGuess !== computerGuess){
-            guessesLeft--;
-        }
 
-        document.userGuess = "you chose" + userGuess;
-    })
+
+    <script>
+        $(document).ready(function () {
+            // Variables throughout the game
+            var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+            //wins and losses
+            var wins = 0;
+            var losses = 0;
+            // Guesses by both computer and user
+            var computerGuess = "";
+            var guessesLeft = 10;
+            var guessesSoFar = [];
+
+            // When user hits a key it logs it and links it to the event
+            $(document).keyup(function (event) {
+                getRandomLetter();
+                // This is the user lines of code for if they type upper or lower it will capture it 
+                var userGuess = event.key;
+                userGuess == computerGuess[Math.floor(Math.random() * computerChoices.length)];
+                userGuess.toLowerCase();
+                console.log(userGuess);
+                // making the computer generate a random number from the array
+                function getRandomLetter() {
+                    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+                    console.log(computerGuess);
+                }
+                
+                guessesSoFar.push(userGuess);
+
+                // If and else statements
+                if (userGuess == computerGuess) {
+                    wins++;
+                    alert("Wow you are a psychic! You Win! ");
+                    guessesLeft = 10;
+                    guessesSoFar.length = 0;
+                }
+                else if (guessesLeft == 0) {
+                    losses++;
+                    alert("You're not psychic at all! Try again")
+                    guessesLeft = 10;
+                    guessesSoFar.length = 0;
+                }
+                else if (userGuess !== computerGuess) {
+                    guessesLeft--;
+                }
+
+                document.getElementById("userGuess").innerHTML = "You guessed: " + userGuess;
+                document.getElementById("computerGuess").innerHTML = "Computer Choose: " + computerGuess;
+                document.getElementById("wins").innerHTML = "Wins: " + wins;
+                document.getElementById("losses").innerHTML = "Losses: " + losses;
+                document.getElementById("guessesLeft").innerHTML = "Guesses Left: " + guessesLeft;
+                document.getElementById("guessesSoFar").innerHTML = "Your Guesses: " + guessesSoFar;
+
+            })
         });
-    
-    
-</script>
+
+
+    </script>
 </body>
 
 </html>
